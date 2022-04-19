@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+<style>
+    body {
+        background: linear-gradient(green, white);
+    }
+    
+    .main {
+        background: white;
+        width: 400px;
+        height: 500px;
+        margin: 0px auto;
+    }
+    
+    table {
+        width: 400px;
+        height: 500px;
+        text-align: center;
+        font-size: 30px;
+        box-shadow: black 10px 10px 20px;
+    }
+    
+    tr {
+        border: 5px solid black;
+    }
+    
+    td {
+        border-top: 2px solid black;
+        border-left: 2px solid black;
+        cursor: pointer;
+    }
+</style>
+
+<body>
+    <div class="main">
+        <table>
+            <tr>
+                <td colspan="4" id="display" style="line-height:30px; font-size:40px; text-align:right">
+                    0</td>
+
+            </tr>
+            <tr>
+                <td onclick="addValue('%')">
+                    %
+                </td>
+                <td onclick="Clear()">
+                    CE
+                </td>
+                <td onclick="Clear()">
+                    C
+                </td>
+                <td onclick="Remove()">
+                    < ! </td>
+
+            </tr>
+            <tr>
+                <td onclick="oneby()">
+                    <sup>1</sup>/ <sub>x</sub>
+                </td>
+                <td onclick="Square()">
+                    x<sup>2</sup>
+
+                </td>
+                <td onclick="squreRoot()">
+                    <sup>2</sup>√x
+                </td>
+                <td onclick="addValue('/')">
+                    ÷
+                </td>
+            </tr>
+            <tr>
+                <td onclick="addValue(7)">
+                    7
+                </td>
+                <td value="8" onclick="addValue(8)">
+                    8
+                </td>
+                <td value="9" onclick="addValue(9)">
+                    9
+                </td>
+                <td value="*" onclick="addValue('*')">
+                    x
+                </td>
+            </tr>
+            <tr>
+                <td value="4" onclick="addValue(4)">
+                    4
+                </td>
+                <td value="5" onclick="addValue(5)">
+                    5
+                </td>
+                <td value="6" onclick="addValue(6)">
+                    6
+                </td>
+                <td value="-" onclick="addValue('-')">
+                    -
+                </td>
+            </tr>
+            <tr>
+                <td value="1" onclick="addValue(1)">
+                    1
+                </td>
+                <td value="2" onclick="addValue(2)">
+                    2
+                </td>
+                <td value="3" onclick="addValue(3)">
+                    3
+                </td>
+                <td value="+" onclick="addValue('+')">
+                    +
+                </td>
+            </tr>
+            <tr>
+                <td value="" onclick="addValue('--')">
+                    +/-
+                </td>
+                <td value="0" onclick="addValue(0)">
+                    0</td>
+                <td value="." onclick="addValue('.')">. </td>
+                <td value="=" onclick="Calculate()"> =</td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        function Remove() {
+            var x = document.getElementById("display").innerHTML;
+            x = x.slice(0, x.length - 1)
+            document.getElementById('display').innerHTML = x;
+            if (x.length == 0) {
+                document.getElementById("display").innerHTML = 0;
+            }
+        }
+
+        function Clear() {
+            document.getElementById("display").innerHTML = 0;
+
+        };
+
+        function Calculate() {
+            var result = document.getElementById("display").innerHTML;
+            console.log(eval(result));
+            result = eval(result);
+            document.getElementById("display").innerHTML = result;
+        };
+
+        function addValue(value) {
+            var x;
+            x = document.getElementById("display").innerHTML;
+            if (x == 0) {
+                document.getElementById("display").innerHTML = value;
+            } else if (value == '--') {
+                if (x[0] == '-') {
+                    document.getElementById("display").innerHTML = x[1, x.length - 1];
+                } else {
+                    document.getElementById("display").innerHTML = '-' + x;
+                };
+            } else {
+                document.getElementById("display").innerHTML = x + value;
+
+            }
+
+            console.log(x)
+        }
+
+        function oneby() {
+            x = document.getElementById("display").innerHTML;
+            document.getElementById("display").innerHTML = 1 / eval(x);
+        }
+
+        function squreRoot() {
+            x = document.getElementById("display").innerHTML;
+            document.getElementById("display").innerHTML = Math.sqrt(eval(x));
+        }
+
+        function Square() {
+            value = document.getElementById("display").innerHTML;
+            document.getElementById("display").innerHTML = eval(value) * eval(value);
+        }
+    </script>
+</body>
+
+</html>
